@@ -2,7 +2,7 @@
   font-family: "Montserrat";
   src: url("assets/fonts/montserrat.ttf") format("truetype");
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 400;
   font-display: swap;
 }
 
@@ -124,7 +124,7 @@ img {
 
 .brand-lockup {
   position: relative;
-  width: min(520px, 55vw);
+  width: min(338px, 38vw);
   margin: 30px auto 0;
 }
 
@@ -136,8 +136,8 @@ img {
   position: absolute;
   top: 53%;
   left: 25%;
-  min-width: 112px;
-  padding: 2px 13px 3px;
+  min-width: 82px;
+  padding: 2px 10px 3px;
   transform: translate(-50%, -50%) rotate(-2deg);
   color: #745018;
   border: 1px solid rgba(212, 166, 70, .85);
@@ -145,7 +145,7 @@ img {
   background: rgba(249, 241, 214, .9);
   box-shadow: 0 0 18px rgba(255, 224, 114, .8);
   font-family: "Juana", Georgia, serif;
-  font-size: 22px;
+  font-size: 16px;
   line-height: 1.15;
   text-align: center;
 }
@@ -204,10 +204,9 @@ img {
 }
 
 .preparation__heart {
-  width: 104px;
-  height: 78px;
-  margin: 0 auto 2px;
-  object-fit: contain;
+  width: 92px;
+  height: auto;
+  margin: 0 auto 14px;
 }
 
 .preparation__callout {
@@ -279,6 +278,19 @@ img {
   color: #fff;
 }
 
+.title-juana {
+  font-family: "Juana", Georgia, serif;
+  font-size: clamp(46px, 5vw, 62px);
+  font-weight: 600;
+  line-height: .95;
+}
+
+.title-juana small {
+  margin-top: 8px;
+  font-family: "Juana", Georgia, serif;
+  font-weight: 600;
+}
+
 .devotional {
   overflow: hidden;
   padding: 92px 24px 34px;
@@ -309,8 +321,9 @@ img {
 blockquote {
   margin: 0 auto;
   padding: 0;
-  font-family: "Juana", Georgia, serif;
+  font-family: "Montserrat", Arial, sans-serif;
   font-size: 17px;
+  font-weight: 400;
   line-height: 1.7;
   text-align: center;
 }
@@ -322,7 +335,12 @@ blockquote p {
 blockquote cite {
   color: var(--accent);
   font-style: normal;
-  font-weight: 600;
+  font-weight: 800;
+}
+
+.devotional .reading-column h3 {
+  color: var(--accent);
+  font-weight: 800;
 }
 
 .divider {
@@ -359,9 +377,8 @@ blockquote cite {
 .corner-ornament {
   position: absolute;
   z-index: 1;
-  width: 230px;
+  width: 210px;
   pointer-events: none;
-  mix-blend-mode: multiply;
 }
 
 .corner-ornament--top {
@@ -409,9 +426,8 @@ blockquote cite {
 }
 
 .praying-hands {
-  width: min(620px, 90vw);
+  width: min(250px, 72vw);
   margin: 32px auto 0;
-  mix-blend-mode: multiply;
 }
 
 .song {
@@ -559,13 +575,13 @@ blockquote cite {
   }
 
   .brand-lockup {
-    width: min(440px, 94vw);
+    width: min(286px, 74vw);
     margin-top: 94px;
   }
 
   .day-badge {
-    min-width: 90px;
-    font-size: 18px;
+    min-width: 74px;
+    font-size: 15px;
   }
 
   .weekly-purpose {
@@ -598,7 +614,7 @@ blockquote cite {
   }
 
   .corner-ornament {
-    width: 150px;
+    width: 135px;
     opacity: .82;
   }
 
