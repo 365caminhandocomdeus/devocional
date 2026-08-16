@@ -1,0 +1,639 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("assets/fonts/montserrat.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Great Vibes";
+  src: url("assets/fonts/great-vibes.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Juana";
+  src: url("assets/fonts/juana-semibold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+:root {
+  --paper: #f7f2e6;
+  --ink: #251e17;
+  --muted: #6b5c4a;
+  --accent: #c78b1e;
+  --accent-light: #efc74d;
+  --surface-dark: #8f5e1f;
+  --measure: 850px;
+}
+
+.theme-azul {
+  --paper: #e8e6df;
+  --accent: #2f73ba;
+  --accent-light: #75a9db;
+  --surface-dark: #1464be;
+}
+
+.theme-verde {
+  --paper: #ecead7;
+  --accent: #4f7e35;
+  --accent-light: #91b977;
+  --surface-dark: #2a6716;
+}
+
+.theme-rosa {
+  --paper: #f6f0e2;
+  --accent: #d875a4;
+  --accent-light: #efa9c8;
+  --surface-dark: #c76696;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: #0d0d0d;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.72;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.hero {
+  min-height: 540px;
+  color: #fff;
+  background-image: linear-gradient(90deg, rgba(65, 34, 2, .18), rgba(255, 238, 169, .07)), url("assets/backgrounds/header-amarelo.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.theme-azul .hero {
+  background-image: linear-gradient(90deg, rgba(6, 36, 76, .18), rgba(213, 232, 255, .07)), url("assets/backgrounds/header-azul.png");
+}
+
+.theme-verde .hero {
+  background-image: linear-gradient(90deg, rgba(18, 54, 7, .18), rgba(223, 247, 207, .07)), url("assets/backgrounds/header-verde.png");
+}
+
+.theme-rosa .hero {
+  background-image: linear-gradient(90deg, rgba(87, 24, 55, .14), rgba(255, 226, 239, .07)), url("assets/backgrounds/header-rosa.png");
+}
+
+.hero__inner {
+  position: relative;
+  width: min(1120px, calc(100% - 48px));
+  min-height: 540px;
+  margin: 0 auto;
+  padding: 44px 0 30px;
+}
+
+.week-label {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.12;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .18);
+}
+
+.week-label strong {
+  font-size: 20px;
+}
+
+.week-label span {
+  font-size: 15px;
+}
+
+.brand-lockup {
+  position: relative;
+  width: min(520px, 55vw);
+  margin: 30px auto 0;
+}
+
+.brand-lockup img {
+  width: 100%;
+}
+
+.day-badge {
+  position: absolute;
+  top: 53%;
+  left: 25%;
+  min-width: 112px;
+  padding: 2px 13px 3px;
+  transform: translate(-50%, -50%) rotate(-2deg);
+  color: #745018;
+  border: 1px solid rgba(212, 166, 70, .85);
+  border-radius: 50%;
+  background: rgba(249, 241, 214, .9);
+  box-shadow: 0 0 18px rgba(255, 224, 114, .8);
+  font-family: "Juana", Georgia, serif;
+  font-size: 22px;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.weekly-purpose {
+  position: absolute;
+  right: 0;
+  bottom: 34px;
+  left: 0;
+  max-width: 980px;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .22);
+}
+
+.weekly-purpose strong {
+  font-weight: 800;
+}
+
+.section-light {
+  position: relative;
+  background-color: var(--paper);
+  background-image: url("assets/backgrounds/paper-light.png");
+  background-repeat: repeat;
+}
+
+.section-color {
+  color: #fff;
+  background-color: var(--surface-dark);
+  background-image: linear-gradient(rgba(126, 77, 22, .05), rgba(126, 77, 22, .12)), url("assets/backgrounds/section-amarelo.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.theme-azul .section-color,
+.theme-azul .footer {
+  background-image: linear-gradient(rgba(13, 69, 129, .04), rgba(13, 69, 129, .12)), url("assets/backgrounds/section-azul.png");
+}
+
+.theme-verde .section-color,
+.theme-verde .footer {
+  background-image: linear-gradient(rgba(27, 80, 10, .04), rgba(27, 80, 10, .12)), url("assets/backgrounds/section-verde.png");
+}
+
+.theme-rosa .section-color,
+.theme-rosa .footer {
+  background-image: linear-gradient(rgba(128, 40, 84, .04), rgba(128, 40, 84, .1)), url("assets/backgrounds/section-rosa.png");
+}
+
+.preparation {
+  min-height: 300px;
+  padding: 34px 24px 58px;
+  text-align: center;
+}
+
+.preparation__heart {
+  width: 104px;
+  height: 78px;
+  margin: 0 auto 2px;
+  object-fit: contain;
+}
+
+.preparation__callout {
+  display: table;
+  margin: 0 auto 28px;
+  padding: 7px 28px;
+  color: #6f5624;
+  background: #f4d52c;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.preparation > p:last-child {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.reading-column {
+  position: relative;
+  z-index: 2;
+  width: min(var(--measure), calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.reading-column p {
+  margin: 0 0 24px;
+}
+
+.reading-column h3 {
+  margin: 28px 0 16px;
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.reading-column--light {
+  color: #fff;
+}
+
+.opening-prayer {
+  padding: 68px 24px 76px;
+  text-align: center;
+}
+
+.opening-prayer .reading-column {
+  max-width: 800px;
+}
+
+.script-title {
+  margin: 0 0 35px;
+  color: var(--accent);
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(58px, 7vw, 82px);
+  font-weight: 400;
+  line-height: .8;
+  text-align: center;
+}
+
+.script-title small {
+  display: block;
+  margin-top: 3px;
+  font-family: "Juana", Georgia, serif;
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: lowercase;
+}
+
+.script-title--light {
+  color: #fff;
+}
+
+.devotional {
+  overflow: hidden;
+  padding: 92px 24px 34px;
+}
+
+.section-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 34px;
+  color: var(--accent);
+  line-height: .75;
+  text-transform: uppercase;
+}
+
+.section-heading__main {
+  font-family: "Juana", Georgia, serif;
+  font-size: clamp(42px, 5vw, 62px);
+}
+
+.section-heading__script {
+  margin-left: 80px;
+  font-family: "Great Vibes", cursive;
+  font-size: 34px;
+  text-transform: none;
+}
+
+blockquote {
+  margin: 0 auto;
+  padding: 0;
+  font-family: "Juana", Georgia, serif;
+  font-size: 17px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+blockquote p {
+  margin-bottom: 5px !important;
+}
+
+blockquote cite {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 24px;
+  margin: 42px auto;
+}
+
+.divider::before,
+.divider::after {
+  width: 90px;
+  height: 1px;
+  content: "";
+  background: var(--accent);
+}
+
+.divider span {
+  width: 10px;
+  height: 10px;
+  margin: 0 10px;
+  transform: rotate(45deg);
+  background: var(--accent);
+}
+
+.divider--light::before,
+.divider--light::after,
+.divider--light span {
+  background: rgba(255, 225, 121, .75);
+}
+
+.corner-ornament {
+  position: absolute;
+  z-index: 1;
+  width: 230px;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+.corner-ornament--top {
+  top: 0;
+  left: 0;
+}
+
+.corner-ornament--bottom {
+  right: 0;
+  bottom: 0;
+}
+
+.bible {
+  width: 340px;
+  margin: 58px auto 0;
+  filter: drop-shadow(0 14px 18px rgba(120, 80, 23, .13));
+}
+
+.task {
+  padding: 78px 24px 68px;
+  text-align: center;
+}
+
+.task .reading-column {
+  max-width: 760px;
+}
+
+.task h3 {
+  margin-bottom: 35px;
+}
+
+.closing-prayer {
+  overflow: hidden;
+  padding: 78px 24px 0;
+  text-align: center;
+}
+
+.closing-prayer .reading-column {
+  max-width: 850px;
+}
+
+.amen {
+  margin-top: 32px !important;
+  font-weight: 800;
+}
+
+.praying-hands {
+  width: min(620px, 90vw);
+  margin: 32px auto 0;
+  mix-blend-mode: multiply;
+}
+
+.song {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  min-height: 350px;
+  color: #f5cb39;
+  background: #090909;
+}
+
+.song__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 45px;
+  text-align: center;
+}
+
+.song__eyebrow {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.song h2 {
+  margin: 4px 0 0;
+  font-family: "Juana", Georgia, serif;
+  font-size: clamp(36px, 5vw, 62px);
+  line-height: 1.05;
+}
+
+.song p {
+  margin: 2px 0 22px;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.song__button {
+  padding: 9px 20px;
+  color: #f5cb39;
+  border: 1px solid #f5cb39;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color .2s ease, background .2s ease;
+}
+
+.song__button:hover,
+.song__button:focus-visible {
+  color: #101010;
+  background: #f5cb39;
+}
+
+.song__video {
+  position: relative;
+  overflow: hidden;
+  min-height: 350px;
+}
+
+.song__video::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(90deg, rgba(8, 8, 8, .28), transparent 45%);
+}
+
+.song__video img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.play {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 64px;
+  height: 64px;
+  transform: translate(-50%, -50%);
+  place-items: center;
+  color: #111;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, .35);
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: minmax(220px, 360px) 1fr auto;
+  gap: 40px;
+  align-items: center;
+  padding: 30px max(32px, calc((100vw - 1120px) / 2));
+  color: #fff;
+  background-color: #a87321;
+  background-image: url("assets/backgrounds/section-amarelo.png");
+  background-size: cover;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.footer img {
+  width: 280px;
+}
+
+.footer a {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (max-width: 760px) {
+  body {
+    font-size: 15px;
+    line-height: 1.68;
+  }
+
+  .hero,
+  .hero__inner {
+    min-height: 570px;
+  }
+
+  .hero__inner {
+    width: min(100% - 32px, 540px);
+    padding-top: 30px;
+  }
+
+  .week-label {
+    top: 30px;
+  }
+
+  .week-label strong {
+    font-size: 17px;
+  }
+
+  .week-label span {
+    font-size: 13px;
+  }
+
+  .brand-lockup {
+    width: min(440px, 94vw);
+    margin-top: 94px;
+  }
+
+  .day-badge {
+    min-width: 90px;
+    font-size: 18px;
+  }
+
+  .weekly-purpose {
+    bottom: 28px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .preparation {
+    min-height: 270px;
+    padding-inline: 18px;
+  }
+
+  .preparation__callout {
+    padding-inline: 18px;
+  }
+
+  .reading-column {
+    width: min(var(--measure), calc(100% - 12px));
+  }
+
+  .opening-prayer,
+  .task,
+  .closing-prayer {
+    padding-inline: 20px;
+  }
+
+  .devotional {
+    padding: 86px 20px 20px;
+  }
+
+  .corner-ornament {
+    width: 150px;
+    opacity: .82;
+  }
+
+  .section-heading__script {
+    margin-left: 55px;
+  }
+
+  .song {
+    grid-template-columns: 1fr;
+  }
+
+  .song__copy,
+  .song__video {
+    min-height: 280px;
+  }
+
+  .footer {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .footer img {
+    margin: 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main > section {
+    animation: reveal .5s ease both;
+  }
+
+  @keyframes reveal {
+    from { opacity: .01; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+}
