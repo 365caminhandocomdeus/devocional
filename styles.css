@@ -77,7 +77,6 @@ img {
 }
 
 .hero {
-  min-height: 540px;
   color: #fff;
   background-image: linear-gradient(90deg, rgba(65, 34, 2, .18), rgba(255, 238, 169, .07)), url("assets/backgrounds/header-amarelo.png");
   background-position: center;
@@ -99,9 +98,8 @@ img {
 .hero__inner {
   position: relative;
   width: min(1120px, calc(100% - 48px));
-  min-height: 540px;
   margin: 0 auto;
-  padding: 44px 0 30px;
+  padding: 44px 0 34px;
 }
 
 .week-label {
@@ -151,12 +149,8 @@ img {
 }
 
 .weekly-purpose {
-  position: absolute;
-  right: 0;
-  bottom: 34px;
-  left: 0;
   max-width: 980px;
-  margin: 0 auto;
+  margin: 38px auto 0;
   font-size: 14px;
   line-height: 1.5;
   text-align: center;
@@ -278,6 +272,13 @@ img {
   color: #fff;
 }
 
+.gold-detail {
+  width: 150px;
+  height: auto;
+  margin: -27px auto 29px;
+  pointer-events: none;
+}
+
 .title-juana {
   font-family: "Juana", Georgia, serif;
   font-size: clamp(46px, 5vw, 62px);
@@ -341,6 +342,10 @@ blockquote cite {
 .devotional .reading-column h3 {
   color: var(--accent);
   font-weight: 800;
+}
+
+.devotional .reading-column > p {
+  text-align: center;
 }
 
 .divider {
@@ -552,14 +557,9 @@ blockquote cite {
     line-height: 1.68;
   }
 
-  .hero,
-  .hero__inner {
-    min-height: 570px;
-  }
-
   .hero__inner {
     width: min(100% - 32px, 540px);
-    padding-top: 30px;
+    padding: 30px 0 30px;
   }
 
   .week-label {
@@ -585,9 +585,14 @@ blockquote cite {
   }
 
   .weekly-purpose {
-    bottom: 28px;
+    margin-top: 28px;
     font-size: 12px;
     line-height: 1.45;
+  }
+
+  .gold-detail {
+    width: 132px;
+    margin-top: -24px;
   }
 
   .preparation {
