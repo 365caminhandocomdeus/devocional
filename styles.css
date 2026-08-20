@@ -16,6 +16,14 @@
 
 @font-face {
   font-family: "Juana";
+  src: url("assets/fonts/juana-regular-demo.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Juana";
   src: url("assets/fonts/juana-semibold.otf") format("opentype");
   font-style: normal;
   font-weight: 600;
@@ -135,15 +143,16 @@ img {
   top: 53%;
   left: 25%;
   min-width: 82px;
-  padding: 2px 10px 3px;
-  transform: translate(-50%, -50%) rotate(-2deg);
+  padding: 4px 12px;
+  transform: translate(-50%, -50%);
   color: #745018;
-  border: 1px solid rgba(212, 166, 70, .85);
-  border-radius: 50%;
+  border: 0;
+  border-radius: 0;
   background: rgba(249, 241, 214, .9);
   box-shadow: 0 0 18px rgba(255, 224, 114, .8);
   font-family: "Juana", Georgia, serif;
   font-size: 16px;
+  font-weight: 400;
   line-height: 1.15;
   text-align: center;
 }
@@ -282,14 +291,17 @@ img {
 .title-juana {
   font-family: "Juana", Georgia, serif;
   font-size: clamp(46px, 5vw, 62px);
-  font-weight: 600;
+  font-weight: 400;
   line-height: .95;
 }
 
 .title-juana small {
-  margin-top: 8px;
-  font-family: "Juana", Georgia, serif;
-  font-weight: 600;
+  margin-top: 3px;
+  font-family: "Great Vibes", cursive;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .devotional {
@@ -310,6 +322,7 @@ img {
 .section-heading__main {
   font-family: "Juana", Georgia, serif;
   font-size: clamp(42px, 5vw, 62px);
+  font-weight: 400;
 }
 
 .section-heading__script {
@@ -396,9 +409,33 @@ blockquote cite {
   bottom: 0;
 }
 
-.bible {
-  width: 340px;
+.bible-emblem {
+  display: grid;
+  width: min(430px, 82vw);
+  aspect-ratio: 1;
   margin: 58px auto 0;
+  background-image: url("assets/decorations/circulo-amarelo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  place-items: center;
+}
+
+.theme-azul .bible-emblem {
+  background-image: url("assets/decorations/circulo-azul.png");
+}
+
+.theme-rosa .bible-emblem {
+  background-image: url("assets/decorations/circulo-rosa.png");
+}
+
+.theme-verde .bible-emblem {
+  background-image: url("assets/decorations/circulo-verde.png");
+}
+
+.bible {
+  width: 84%;
+  margin: 0;
   filter: drop-shadow(0 14px 18px rgba(120, 80, 23, .13));
 }
 
@@ -551,6 +588,21 @@ blockquote cite {
   text-decoration: none;
 }
 
+.footer__instagram {
+  display: inline-flex;
+  gap: 9px;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.footer__instagram svg {
+  width: 23px;
+  height: 23px;
+  flex: 0 0 auto;
+}
+
 @media (max-width: 760px) {
   body {
     font-size: 15px;
@@ -627,6 +679,10 @@ blockquote cite {
     margin-left: 55px;
   }
 
+  .bible-emblem {
+    width: min(340px, 88vw);
+  }
+
   .song {
     grid-template-columns: 1fr;
   }
@@ -644,6 +700,10 @@ blockquote cite {
   }
 
   .footer img {
+    margin: 0 auto;
+  }
+
+  .footer__instagram {
     margin: 0 auto;
   }
 }
