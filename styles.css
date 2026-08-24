@@ -234,8 +234,8 @@ img {
   display: table;
   margin: 0 auto 28px;
   padding: 7px 28px;
-  color: #6f5624;
-  background: #f4d52c;
+  color: var(--surface-dark);
+  background: var(--accent-light);
   font-size: 14px;
   line-height: 1.3;
 }
