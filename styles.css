@@ -79,6 +79,18 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+strong,
+b {
+  font-weight: 800;
+  font-synthesis: weight;
+}
+
+.reading-column strong,
+.weekly-purpose strong,
+.preparation__callout strong {
+  -webkit-text-stroke: .22px currentColor;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -482,7 +494,7 @@ blockquote cite {
   display: grid;
   grid-template-columns: 1.25fr 1fr;
   min-height: 350px;
-  color: #f5cb39;
+  color: var(--accent-light);
   background: #090909;
 }
 
@@ -520,8 +532,8 @@ blockquote cite {
 
 .song__button {
   padding: 9px 20px;
-  color: #f5cb39;
-  border: 1px solid #f5cb39;
+  color: var(--accent-light);
+  border: 1px solid var(--accent-light);
   border-radius: 999px;
   font-size: 12px;
   font-weight: 700;
@@ -532,7 +544,7 @@ blockquote cite {
 .song__button:hover,
 .song__button:focus-visible {
   color: #101010;
-  background: #f5cb39;
+  background: var(--accent-light);
 }
 
 .song__video {
