@@ -1,0 +1,182 @@
+media:
+  input: assets
+  output: /assets
+
+content:
+  - name: semanas_2026
+    label: Semanas de 2026
+    type: collection
+    path: content/semanas/2026
+    format: json
+    subfolders: false
+    filename:
+      template: "semana-{numero}.json"
+      field: false
+    view:
+      primary: numero
+      fields: [numero, tema, cor]
+      search: [numero, tema, cor]
+      sort: [numero, tema]
+      default:
+        sort: numero
+        order: desc
+    fields:
+      - name: numero
+        label: Número da semana
+        type: number
+        required: true
+        options:
+          min: 1
+          max: 53
+      - name: tema
+        label: Tema da semana
+        type: string
+        required: true
+      - name: proposito
+        label: Propósito da semana
+        type: text
+        required: true
+        description: Este texto será usado automaticamente em todos os devocionais vinculados à semana.
+      - name: cor
+        label: Cor da semana
+        type: select
+        required: true
+        options:
+          values:
+            - name: amarelo
+              label: Amarelo
+            - name: azul
+              label: Azul
+            - name: rosa
+              label: Rosa
+            - name: verde
+              label: Verde
+
+  - name: devocionais_2026
+    label: Devocionais de 2026
+    type: collection
+    path: content/devocionais/2026
+    format: json
+    subfolders: false
+    filename:
+      template: "dia-{dia}.json"
+      field: false
+    view:
+      primary: dia
+      fields: [dia, status, semana, louvor]
+      search: [dia, referencia, louvor, artista]
+      sort: [dia, status]
+      default:
+        sort: dia
+        order: desc
+    fields:
+      - name: ano
+        label: Ano
+        type: number
+        required: true
+        options:
+          min: 2026
+          max: 2026
+      - name: dia
+        label: Dia do devocional
+        type: number
+        required: true
+        options:
+          min: 1
+          max: 366
+      - name: semana
+        label: Semana
+        type: reference
+        required: true
+        description: Selecione a semana para aplicar automaticamente tema, propósito e cor.
+        options:
+          collection: semanas_2026
+          search: "numero,tema"
+          value: "{path}"
+          label: "Semana {numero} — {tema}"
+      - name: status
+        label: Status
+        type: select
+        required: true
+        description: Use Rascunho enquanto estiver revisando. Somente Publicado aparece no site.
+        options:
+          values:
+            - name: rascunho
+              label: Rascunho
+            - name: publicado
+              label: Publicado
+      - name: oracao_inicial
+        label: Oração do dia
+        type: rich-text
+        required: true
+        options:
+          format: html
+          media: false
+          switcher: false
+      - name: versiculo
+        label: Versículo
+        type: text
+        required: true
+      - name: referencia
+        label: Referência do versículo
+        type: string
+        required: true
+      - name: contexto
+        label: Contexto
+        type: rich-text
+        required: true
+        options:
+          format: html
+          media: false
+          switcher: false
+      - name: reflexao
+        label: Reflexão
+        type: rich-text
+        required: true
+        options:
+          format: html
+          media: false
+          switcher: false
+      - name: tarefa
+        label: Tarefa do dia
+        type: rich-text
+        required: true
+        options:
+          format: html
+          media: false
+          switcher: false
+      - name: oracao_final
+        label: Oração final
+        type: rich-text
+        required: true
+        options:
+          format: html
+          media: false
+          switcher: false
+      - name: louvor
+        label: Nome do louvor
+        type: string
+        required: true
+      - name: artista
+        label: Artista
+        type: string
+        required: true
+      - name: youtube
+        label: Link do YouTube
+        type: string
+        required: true
+        pattern:
+          regex: "^https://(www\\.)?(youtube\\.com|youtu\\.be)/.+$"
+          message: Informe um link válido do YouTube.
+
+settings:
+  hide: true
+  content:
+    merge: true
+  commit:
+    identity: app
+    templates:
+      create: "Criar {path} pelo painel"
+      update: "Atualizar {path} pelo painel"
+      delete: "Excluir {path} pelo painel"
+      rename: "Renomear {oldPath} para {newPath} pelo painel"

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR" class="theme-{{COR}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="{{THEME_COLOR}}">
+  <meta name="description" content="{{META_DESCRIPTION}}">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Dia {{DIA}} — Caminhando com Deus 365">
+  <meta property="og:description" content="Seu devocional diário na palma da sua mão.">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <meta property="og:image:width" content="1080">
+  <meta property="og:image:height" content="1080">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <link rel="icon" href="../assets/favicons/favicon-{{COR}}.png" type="image/png">
+  <link rel="stylesheet" href="../styles.css">
+  <title>Dia {{DIA}} — Caminhando com Deus 365</title>
+</head>
+<body>
+  <header class="hero" aria-labelledby="page-title">
+    <div class="hero__inner">
+      <div class="week-label">
+        <strong>Semana {{SEMANA}}</strong>
+        <span>{{TEMA}}</span>
+      </div>
+
+      <div class="brand-lockup">
+        <img src="../assets/logos/logo-vertical-{{COR}}-trim.png" alt="Caminhando com Deus 365">
+        <span class="day-badge" id="page-title">Dia <span class="day-number">{{DIA}}</span></span>
+      </div>
+
+      <p class="weekly-purpose"><strong>Propósito da semana:</strong> {{PROPOSITO}}</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="preparation section-light">
+      <img class="preparation__heart" src="../assets/illustrations/heart-{{COR}}-trim.png" alt="" aria-hidden="true">
+      <p class="preparation__callout">Realize seu devocional com o <strong>coração disponível!</strong></p>
+      <p>Antes de começar, prepare seu ambiente, fique em silêncio, concentre sua atenção na Palavra e permita-se estar presente neste momento.</p>
+    </section>
+
+    <section class="section-color opening-prayer">
+      <div class="reading-column reading-column--light">
+        <h2 class="script-title script-title--light title-juana">Oração <small>do dia</small></h2>
+        <img class="gold-detail" src="../assets/decorations/detalhe-dourado.png" alt="" aria-hidden="true">
+        {{ORACAO_INICIAL}}
+      </div>
+    </section>
+
+    <section class="section-light devotional">
+      <img class="corner-ornament corner-ornament--top" src="../assets/decorations/ornament-top-left.png" alt="" aria-hidden="true">
+      <div class="reading-column">
+        <div class="section-heading">
+          <span class="section-heading__main">Versículo</span>
+          <span class="section-heading__script">do dia</span>
+        </div>
+
+        <blockquote>
+          <p>{{VERSICULO}}</p>
+          <cite>({{REFERENCIA}})</cite>
+        </blockquote>
+
+        <div class="divider" aria-hidden="true"><span></span></div>
+
+        <h2 class="script-title">Reflexão</h2>
+        <h3>Contexto</h3>
+        {{CONTEXTO}}
+
+        <h3>Reflexão</h3>
+        {{REFLEXAO}}
+
+        <div class="bible-emblem">
+          <img class="bible" src="../assets/illustrations/{{BIBLIA}}" alt="Bíblia aberta">
+        </div>
+      </div>
+      <img class="corner-ornament corner-ornament--bottom" src="../assets/decorations/ornament-bottom-right.png" alt="" aria-hidden="true">
+    </section>
+
+    <section class="section-color task">
+      <div class="reading-column reading-column--light">
+        <h2 class="script-title script-title--light title-juana">Tarefa <small>do dia</small></h2>
+        <img class="gold-detail" src="../assets/decorations/detalhe-dourado.png" alt="" aria-hidden="true">
+        <h3>Para hoje</h3>
+        {{TAREFA}}
+        <div class="divider divider--light" aria-hidden="true"><span></span></div>
+      </div>
+    </section>
+
+    <section class="section-light closing-prayer">
+      <div class="reading-column">
+        <h2 class="script-title title-juana">Oração</h2>
+        {{ORACAO_FINAL}}
+      </div>
+      <img class="praying-hands" src="../assets/illustrations/praying-hands.png" alt="Mãos unidas em oração">
+    </section>
+
+    <section class="song" aria-labelledby="song-title">
+      <div class="song__copy">
+        <span class="song__eyebrow">Louvor do dia</span>
+        <h2 id="song-title">{{LOUVOR}} <span aria-hidden="true">♫</span></h2>
+        <p>{{ARTISTA}}</p>
+        <a class="song__button" href="{{YOUTUBE}}" target="_blank" rel="noopener noreferrer">Ouvir no YouTube</a>
+      </div>
+      <a class="song__video" href="{{YOUTUBE}}" target="_blank" rel="noopener noreferrer" aria-label="Assistir {{LOUVOR}} no YouTube">
+        <img src="https://img.youtube.com/vi/{{YOUTUBE_ID}}/hqdefault.jpg" alt="Capa do louvor {{LOUVOR}}" loading="lazy">
+        <span class="play" aria-hidden="true">▶</span>
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <img src="../assets/logos/logo-horizontal-{{COR}}-trim.png" alt="Caminhando com Deus 365">
+    <p>Obrigado por ser parte da nossa caminhada!<br>Que cada dia seja uma oportunidade de estar mais próximo de Deus.</p>
+    <a class="footer__instagram" href="https://www.instagram.com/caminhandocomdeus365/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Caminhando com Deus 365">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+        <circle cx="12" cy="12" r="4.25"></circle>
+        <circle cx="17.35" cy="6.65" r="1" fill="currentColor" stroke="none"></circle>
+      </svg>
+      <span>@caminhandocomdeus365</span>
+    </a>
+  </footer>
+</body>
+</html>

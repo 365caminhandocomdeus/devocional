@@ -1,0 +1,19 @@
+{
+  "name": "caminhando-com-deus-365",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "validate": "node scripts/validate.mjs",
+    "test": "npm run build && npm run validate"
+  },
+  "dependencies": {
+    "sharp": "0.35.3"
+  }
+}
+
+
