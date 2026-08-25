@@ -1,4 +1,4 @@
-name: Publicar devocional
+name: Publicar site e prévia
 
 on:
   push:
@@ -13,8 +13,17 @@ on:
       - "CNAME"
       - "package.json"
       - "package-lock.json"
+      - ".pages.yml"
       - ".github/workflows/publicar.yml"
+  repository_dispatch:
+    types: [atualizar-previa-online]
   workflow_dispatch:
+    inputs:
+      payload:
+        description: Contexto enviado pelo Pages CMS
+        required: false
+        default: "{}"
+        type: string
 
 permissions:
   contents: read
@@ -29,20 +38,43 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Baixar o projeto
-        uses: actions/checkout@v6
+      - name: Baixar o site oficial
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site-oficial
+
+      - name: Baixar a branch de prévia
+        uses: actions/checkout@v4
+        with:
+          ref: painel-cms
+          path: site-previa
 
       - name: Preparar o Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v4
         with:
           node-version: "24"
           cache: npm
+          cache-dependency-path: site-oficial/package-lock.json
 
-      - name: Instalar dependências
+      - name: Instalar dependências do site oficial
+        working-directory: site-oficial
         run: npm ci
 
-      - name: Gerar e validar o site
+      - name: Gerar e validar o site oficial
+        working-directory: site-oficial
         run: npm test
+
+      - name: Instalar dependências da prévia
+        working-directory: site-previa
+        run: npm ci
+
+      - name: Gerar e validar a prévia
+        working-directory: site-previa
+        run: npm test
+
+      - name: Adicionar a prévia ao site
+        run: node site-previa/scripts/compose-preview.mjs site-oficial/dist site-previa/dist
 
       - name: Configurar o GitHub Pages
         uses: actions/configure-pages@v5
@@ -50,7 +82,7 @@ jobs:
       - name: Preparar os arquivos para publicação
         uses: actions/upload-pages-artifact@v5
         with:
-          path: dist
+          path: site-oficial/dist
 
   deploy:
     environment:
@@ -62,4 +94,3 @@ jobs:
       - name: Publicar no GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
-
