@@ -40,6 +40,9 @@ if (image.width !== 1080 || image.height !== 1080) {
 }
 await sharp(share).raw().toBuffer();
 
+const legacyPage = path.join(distDir, "devocional-dia-229-2026", "index.html");
+await access(legacyPage);
+
 const pageDirectory = path.join(distDir, slug);
 const references = [...page.matchAll(/(?:src|href)="([^"]+)"/g)].map(match => match[1]);
 for (const reference of references) {

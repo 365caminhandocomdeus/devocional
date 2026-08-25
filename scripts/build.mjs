@@ -232,6 +232,14 @@ async function copyIfExists(source, destination) {
   }
 }
 
+async function copyLegacyDevotionalPages() {
+  const entries = await readdir(projectRoot, { withFileTypes: true });
+  for (const entry of entries) {
+    if (!entry.isDirectory() || !/^devocional-dia-\d+-\d{4}$/.test(entry.name)) continue;
+    await cp(path.join(projectRoot, entry.name), path.join(distDir, entry.name), { recursive: true });
+  }
+}
+
 function rootPage(latest) {
   const slug = `devocional-dia-${latest.dia}-${latest.ano}`;
   const share = `${domain}/assets/compartilhamento/${latest.ano}/dia-${latest.dia}.png`;
@@ -292,6 +300,7 @@ async function build() {
   await cp(path.join(projectRoot, "styles.css"), path.join(distDir, "styles.css"));
   await cp(path.join(projectRoot, "favicon.png"), path.join(distDir, "favicon.png"));
   await copyIfExists(path.join(projectRoot, "CNAME"), path.join(distDir, "CNAME"));
+  await copyLegacyDevotionalPages();
   await writeFile(path.join(distDir, ".nojekyll"), "");
 
   for (const devotional of devotionals) {
