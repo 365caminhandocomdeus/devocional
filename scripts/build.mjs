@@ -212,7 +212,14 @@ async function createShareImage(devotional, palette) {
 
   await sharp(base)
     .composite([{ input: overlay, top: 0, left: 0 }])
-    .png({ compressionLevel: 6, adaptiveFiltering: false })
+    .png({
+      compressionLevel: 6,
+      adaptiveFiltering: false,
+      palette: true,
+      quality: 90,
+      colours: 256,
+      dither: 1
+    })
     .toFile(destination);
 }
 
