@@ -1,0 +1,43 @@
+name: Solicitar atualização da prévia
+
+on:
+  push:
+    branches: [painel-cms]
+    paths:
+      - "content/**"
+      - "templates/**"
+      - "assets/**"
+      - "scripts/**"
+      - "styles.css"
+      - "favicon.png"
+      - "CNAME"
+      - "package.json"
+      - "package-lock.json"
+      - ".pages.yml"
+      - ".github/workflows/solicitar-previa.yml"
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: Contexto enviado pelo Pages CMS
+        required: false
+        default: "{}"
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: solicitar-previa-online
+  cancel-in-progress: true
+
+jobs:
+  solicitar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Solicitar atualização pela main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh api --method POST
+          repos/${{ github.repository }}/dispatches
+          -f event_type=atualizar-previa-online

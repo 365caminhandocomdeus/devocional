@@ -2,7 +2,7 @@ name: Publicar site e prévia
 
 on:
   push:
-    branches: [main, painel-cms]
+    branches: [main]
     paths:
       - "content/**"
       - "templates/**"
@@ -15,6 +15,8 @@ on:
       - "package-lock.json"
       - ".pages.yml"
       - ".github/workflows/publicar.yml"
+  repository_dispatch:
+    types: [atualizar-previa-online]
   workflow_dispatch:
     inputs:
       payload:

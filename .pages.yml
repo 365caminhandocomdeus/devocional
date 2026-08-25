@@ -185,7 +185,7 @@ settings:
 actions:
   - name: atualizar-previa-online
     label: Atualizar prévia online
-    workflow: publicar.yml
+    workflow: solicitar-previa.yml
     ref: current
     cancelable: true
     confirm: false
