@@ -121,6 +121,7 @@ content:
         label: Referência do versículo
         type: string
         required: true
+        description: Informe somente o livro, capítulo e versículo, sem parênteses. Exemplo: Lucas 16:10.
       - name: contexto
         label: Contexto
         type: rich-text
