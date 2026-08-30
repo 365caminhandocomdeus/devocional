@@ -22,7 +22,7 @@ jobs:
         with:
           ref: painel-cms
           path: painel
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Baixar site oficial
         uses: actions/checkout@v4
@@ -129,3 +129,7 @@ jobs:
           dias="$(awk -F'/' '/content\/devocionais/{gsub(/dia-|\.json/, "", $NF); print $NF}' ../arquivos-publicados.txt | paste -sd ', ' -)"
           git commit -m "Publicar automaticamente devocional dia $dias"
           git push origin HEAD:main
+
+          gh api --method POST \
+            repos/${{ github.repository }}/dispatches \
+            -f event_type=atualizar-previa-online
