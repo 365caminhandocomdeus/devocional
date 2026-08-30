@@ -69,6 +69,14 @@ content:
       default:
         sort: dia
         order: desc
+    actions:
+      - name: atualizar-previa-devocional
+        label: Atualizar prévia
+        scope: entry
+        workflow: solicitar-previa.yml
+        ref: current
+        cancelable: true
+        confirm: false
     fields:
       - name: ano
         label: Ano
