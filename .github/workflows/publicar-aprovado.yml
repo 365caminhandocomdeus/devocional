@@ -1,0 +1,131 @@
+name: Publicar devocional aprovado
+
+on:
+  push:
+    branches: [painel-cms]
+    paths:
+      - "content/devocionais/2026/*.json"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicacao-automatica
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar conteúdo do painel
+        uses: actions/checkout@v4
+        with:
+          ref: painel-cms
+          path: painel
+          fetch-depth: 2
+
+      - name: Baixar site oficial
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: oficial
+          fetch-depth: 0
+
+      - name: Preparar o Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: oficial/package-lock.json
+
+      - name: Selecionar conteúdo publicado
+        id: selecionar
+        shell: bash
+        env:
+          COMMIT_ANTERIOR: ${{ github.event.before }}
+          COMMIT_ATUAL: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          cd painel
+
+          if [[ "$COMMIT_ANTERIOR" =~ ^0+$ ]]; then
+            mapfile -t arquivos < <(git show --pretty="" --name-only "$COMMIT_ATUAL" -- "content/devocionais/2026/*.json")
+          else
+            mapfile -t arquivos < <(git diff --name-only "$COMMIT_ANTERIOR" "$COMMIT_ATUAL" -- "content/devocionais/2026/*.json")
+          fi
+
+          copiados=0
+
+          for arquivo in "${arquivos[@]}"; do
+            [[ -f "$arquivo" ]] || continue
+
+            status="$(jq -r '.status // empty' "$arquivo")"
+            [[ "$status" == "publicado" ]] || continue
+
+            if [[ ! "$arquivo" =~ ^content/devocionais/2026/dia-[0-9]+\.json$ ]]; then
+              echo "Caminho de devocional inválido: $arquivo"
+              exit 1
+            fi
+
+            semana="$(jq -r '.semana // empty' "$arquivo")"
+            if [[ ! "$semana" =~ ^content/semanas/2026/semana-[0-9]+\.json$ ]]; then
+              echo "Referência de semana inválida em $arquivo: $semana"
+              exit 1
+            fi
+
+            if [[ ! -f "$semana" ]]; then
+              echo "Semana não encontrada: $semana"
+              exit 1
+            fi
+
+            mkdir -p "../oficial/$(dirname "$arquivo")" "../oficial/$(dirname "$semana")"
+            cp "$arquivo" "../oficial/$arquivo"
+            cp "$semana" "../oficial/$semana"
+
+            printf '%s\n' "$arquivo" "$semana" >> ../arquivos-publicados.txt
+            copiados=$((copiados + 1))
+          done
+
+          if [[ "$copiados" -eq 0 ]]; then
+            echo "Nenhum devocional com status publicado foi alterado."
+            echo "publicar=false" >> "$GITHUB_OUTPUT"
+          else
+            sort -u ../arquivos-publicados.txt -o ../arquivos-publicados.txt
+            echo "publicar=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Instalar dependências
+        if: steps.selecionar.outputs.publicar == 'true'
+        working-directory: oficial
+        run: npm ci
+
+      - name: Validar site oficial
+        if: steps.selecionar.outputs.publicar == 'true'
+        working-directory: oficial
+        run: npm test
+
+      - name: Enviar conteúdo para a main
+        if: steps.selecionar.outputs.publicar == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          cd oficial
+          git config user.name "Caminhando com Deus 365"
+          git config user.email "actions@users.noreply.github.com"
+
+          while IFS= read -r arquivo; do
+            git add -- "$arquivo"
+          done < ../arquivos-publicados.txt
+
+          if git diff --cached --quiet; then
+            echo "O conteúdo aprovado já está publicado na main."
+            exit 0
+          fi
+
+          dias="$(awk -F'/' '/content\/devocionais/{gsub(/dia-|\.json/, "", $NF); print $NF}' ../arquivos-publicados.txt | paste -sd ', ' -)"
+          git commit -m "Publicar automaticamente devocional dia $dias"
+          git push origin HEAD:main
