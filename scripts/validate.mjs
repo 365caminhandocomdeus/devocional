@@ -6,17 +6,18 @@ import sharp from "sharp";
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const distDir = path.join(projectRoot, "dist");
 const contentDir = path.join(projectRoot, "content", "devocionais", "2026");
+const includeDrafts = process.env.INCLUDE_DRAFTS === "true";
 
-const published = [];
+const eligible = [];
 for (const name of await readdir(contentDir)) {
   if (!name.endsWith(".json")) continue;
   const data = JSON.parse(await readFile(path.join(contentDir, name), "utf8"));
-  if (data.status === "publicado") published.push(data);
+  if (includeDrafts || data.status === "publicado") eligible.push(data);
 }
-published.sort((a, b) => a.dia - b.dia);
-if (!published.length) throw new Error("Nenhum devocional publicado para validar.");
+eligible.sort((a, b) => a.dia - b.dia);
+if (!eligible.length) throw new Error("Nenhum devocional disponível para validar.");
 
-const latest = published.at(-1);
+const latest = eligible.at(-1);
 const slug = `devocional-dia-${latest.dia}-${latest.ano}`;
 const root = await readFile(path.join(distDir, "index.html"), "utf8");
 const page = await readFile(path.join(distDir, slug, "index.html"), "utf8");

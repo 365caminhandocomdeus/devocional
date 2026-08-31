@@ -6,6 +6,7 @@ import sharp from "sharp";
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const distDir = path.join(projectRoot, "dist");
 const domain = "https://caminhandocomdeus365.com.br";
+const includeDrafts = process.env.INCLUDE_DRAFTS === "true";
 
 const palettes = {
   amarelo: {
@@ -139,7 +140,7 @@ async function loadContent() {
   }
 
   return devotionals
-    .filter(item => item.status === "publicado")
+    .filter(item => includeDrafts || item.status === "publicado")
     .sort((a, b) => a.ano - b.ano || a.dia - b.dia);
 }
 
@@ -292,7 +293,7 @@ function notFoundPage(latest) {
 async function build() {
   const template = await readFile(path.join(projectRoot, "templates", "devocional.html"), "utf8");
   const devotionals = await loadContent();
-  if (!devotionals.length) throw new Error("Nenhum devocional publicado foi encontrado.");
+  if (!devotionals.length) throw new Error("Nenhum devocional disponível foi encontrado.");
 
   await rm(distDir, { recursive: true, force: true });
   await mkdir(distDir, { recursive: true });

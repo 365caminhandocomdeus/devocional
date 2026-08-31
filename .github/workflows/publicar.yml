@@ -71,6 +71,8 @@ jobs:
 
       - name: Gerar e validar a prévia
         working-directory: site-previa
+        env:
+          INCLUDE_DRAFTS: "true"
         run: npm test
 
       - name: Adicionar a prévia ao site
