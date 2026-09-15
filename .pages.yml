@@ -3,6 +3,29 @@ media:
   output: /assets
 
 content:
+  - name: acessos_rapidos
+    label: Acessos rápidos
+    type: file
+    path: content/painel/acessos-rapidos.json
+    format: json
+    fields:
+      - name: previa
+        label: Último devocional gerado
+        type: rich-text
+        readonly: true
+        options:
+          format: html
+          media: false
+          switcher: false
+      - name: publicado
+        label: Último devocional publicado
+        type: rich-text
+        readonly: true
+        options:
+          format: html
+          media: false
+          switcher: false
+
   - name: semanas_2026
     label: Semanas de 2026
     type: collection
